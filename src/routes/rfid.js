@@ -29,7 +29,17 @@ function getEssentialVehicleDetails(application) {
 function getRFIDValidity(application) {
   if (!application || !application.rfidInfo) return null;
   
-  return { ...application.rfidInfo };
+  const rfidInfo = { ...application.rfidInfo };
+  
+  // Convert Date objects to ISO strings for Firebase compatibility
+  if (rfidInfo.validUntil instanceof Date) {
+    rfidInfo.validUntil = rfidInfo.validUntil.toISOString();
+  }
+  if (rfidInfo.assignedAt instanceof Date) {
+    rfidInfo.assignedAt = rfidInfo.assignedAt.toISOString();
+  }
+  
+  return rfidInfo;
 }
 
 // @route   GET /api/rfid/scanId?tagId=E280...

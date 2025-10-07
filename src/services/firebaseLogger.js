@@ -54,11 +54,14 @@ class FirebaseLogger {
     }
   }
 
-  // Helper method to clean data
+  // In firebaseLogger.js - update the cleanData method
   cleanData(obj) {
     Object.keys(obj).forEach(key => {
       if (obj[key] === undefined || obj[key] === null) {
         delete obj[key];
+      } else if (obj[key] instanceof Date) {
+        // Convert Date objects to ISO strings
+        obj[key] = obj[key].toISOString();
       } else if (typeof obj[key] === 'object' && !(obj[key] instanceof Date)) {
         this.cleanData(obj[key]);
         // Remove empty objects
