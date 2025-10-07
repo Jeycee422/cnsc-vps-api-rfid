@@ -29,11 +29,7 @@ function getEssentialVehicleDetails(application) {
 function getRFIDValidity(application) {
   if (!application || !application.rfidInfo) return null;
   
-  return {
-    isActive: application.rfidInfo.isActive,
-    validUntil: application.rfidInfo.validUntil,
-    assignedAt: application.rfidInfo.assignedAt
-  };
+  return { ...application.rfidInfo };
 }
 
 // @route   GET /api/rfid/scanId?tagId=E280...
