@@ -29,7 +29,11 @@ function getEssentialVehicleDetails(application) {
 function getRFIDValidity(application) {
   if (!application || !application.rfidInfo) return null;
   
-  const rfidInfo = { ...application.rfidInfo };
+  const rfidInfo = { 
+    isActive: application.rfidInfo.isActive,
+    validUntil: application.rfidInfo.validUntil,
+    assignedAt: application.rfidInfo.assignedAt
+  };
   
   // Convert Date objects to ISO strings for Firebase compatibility
   if (rfidInfo.validUntil instanceof Date) {
